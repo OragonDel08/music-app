@@ -56,3 +56,59 @@ Before you begin, ensure you have the following installed on your machine:
     ```bash
     php artisan migrate
     php artisan db:seed
+    ```
+
+    - **Admin Credentials**:
+        - Email: `admin@example.com`
+        - Password: `password`
+
+    - **User Credentials**:
+        - Email: `user@example.com`
+        - Password: `password`
+
+
+### Frontend Setup (Vue 3)
+
+1. Navigate to the frontend directory:
+
+    ```bash
+    cd music-app-frontend
+
+2. Install the frontend dependencies using npm:
+
+    ```bash
+    npm install
+
+
+## Running the Project
+
+### Running the Backend
+
+1. Run the Laravel development server:
+
+    ```bash
+    php artisan serve
+    ```
+    By default, it will be accessible at http://localhost:8000.
+
+### Running the Frontend
+
+1. In the frontend directory, run the Vite development server:
+    ```bash
+    npm run dev
+    ```
+    This will start the Vite development server, typically accessible at http://localhost:3000.
+
+
+## Environment Variables
+
+The project uses .env files for both the backend (Laravel) and frontend (Vite). Ensure the following environment variables are set:
+
+### Backend (.env)
+
+- DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD
+- APP_KEY (generated automatically by php artisan key:generate)
+
+### Frontend (.env)
+
+- VITE_API_BASE_URL: The base URL of your backend API.
