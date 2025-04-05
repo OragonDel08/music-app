@@ -1,0 +1,703 @@
+// Variables
+$primary-color: #7E22CE;
+$primary-color-dark: #4C1D95;
+$primary-color-dark-1: #3b0e70;
+$bg-color: #F3E8FF;
+$border-color: #D8B4FE;
+$error-color: #EF4444;
+$border-radius: 8px;
+$input-padding: 12px;
+$shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+$sidebar-width: 250px;
+$header-height: 60px;
+$grid-gap: 1rem; 
+$grid-columns: 12;
+
+// Font Family
+$font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+// Global Styles
+body {
+  font-family: $font-family;
+  background-color: $bg-color;
+  color: #111827;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Centered Container
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $bg-color;
+}
+
+// Login Card
+.login-card {
+  background: white;
+  padding: 2rem;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+// Form Styling
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    padding: $input-padding;
+    border: 2px solid $border-color;
+    border-radius: $border-radius;
+    font-size: 1rem;
+    transition: 0.3s;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+      box-shadow: 0 0 5px rgba($primary-color, 0.5);
+    }
+
+    &.error {
+      border-color: $error-color;
+      box-shadow: 0 0 5px rgba($error-color, 0.5);
+    }
+  }
+
+  .error-message {
+    color: $error-color;
+    font-size: 0.875rem;
+    margin-top: 0.3rem;
+  }
+}
+
+// Login Button
+.login-btn {
+  width: 100%;
+  transition: 0.3s;
+
+  &:hover {
+    background: $primary-color-dark;
+  }
+}
+
+// Additional Text Links
+.text-muted {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+
+  a {
+    color: $primary-color;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Auth Layout
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+
+  &.sidebar-open .sidebar {
+    transform: translateX(0);
+  }
+
+  &.sidebar-open .overlay {
+    display: block;
+  }
+}
+
+// Sidebar
+.sidebar {
+  width: $sidebar-width;
+  background-color: $primary-color-dark;
+  color: white;
+  padding: 1.5rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: $shadow;
+  transition: transform 0.3s ease;
+  z-index: 1001;
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+
+  nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    color: white;
+    text-decoration: none;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: $primary-color-dark-1;
+    }
+
+    &.active {
+      background-color: $primary-color-dark-1;
+    }
+  }
+
+  // Hide sidebar by default on small screens
+  @media (max-width: 768px) {
+    transform: translateX(-100%);
+  }
+}
+
+// Content Area
+.content-wrapper {
+  margin-top: $header-height;
+  position: relative;
+  margin-left: 280px;
+  width: 100%;
+  max-width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
+}
+
+// Topbar
+.topbar {
+  height: $header-height;
+  background-color: white;
+  box-shadow: $shadow;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  z-index: 1000;
+  .topbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 280px;
+    padding: 0 1.5rem;
+    height: 100%;
+    .menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+  
+      @media (max-width: 768px) {
+        display: block;
+      }
+    }
+    .greeting {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .user-dropdown {
+      position: relative;
+  
+      .user-btn {
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+  
+        .user-name {
+          margin-right: 8px;
+          display: block;
+          @media (max-width: 768px) {
+            display: none;
+          }
+        }
+  
+        .icon {
+          width: 20px;
+          height: 20px;
+          fill: currentColor;
+        }
+      }
+  
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        width: max-content;
+        padding: 0.5rem;
+        z-index: 99;
+  
+        .logout-btn {
+          background: none !important;
+          border: none !important;
+          color: $primary-color !important;
+          font-size: 1rem;
+          width: 200px;
+  
+          &:hover {
+            background-color: #f1f1f1 !important;
+          }
+        }
+      }
+  
+      &:hover .dropdown-menu {
+        display: block;
+      }
+    }
+    .logout-btn {
+      background-color: $primary-color;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 0.375rem;
+      transition: background-color 0.2s, border-color 0.2s;
+      color: #FFFFFF;
+      
+      &:hover {
+        background-color: $primary-color-dark;
+      }
+  
+      &:disabled {
+        background-color: #f9fafb;
+        cursor: not-allowed;
+        border-color: #e5e7eb;
+        color: #d1d5db;
+      }
+    }
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+}
+
+// Main Content
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: $bg-color;
+}
+
+// Overlay when sidebar is open on mobile
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 900;
+}
+
+// Card Styles
+.card {
+  position: relative;
+  height: 300px;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: $shadow;
+  display: flex;
+  align-items: flex-end;
+  background-color: #FFFFFF;
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to top, $primary-color, rgba(0, 0, 0, 0));
+    color: #FFFFFF;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+  }
+
+  &__actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    .icon-btn-group {
+      display: flex;
+      gap: 5px;
+    }
+    .icon-btn {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #ffffff;
+      font-weight: 600;
+      transition: transform 0.2s ease-in-out;
+  
+      .icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+        &.active {
+          color: #3b82f6;
+        }
+      }
+  
+      &:hover {
+        transform: scale(1.1);
+        color: #c084fc;
+      }
+    }
+    .icon-btn-trash {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #ffffff;
+      font-weight: 600;
+      transition: transform 0.2s ease-in-out;
+  
+      .icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+      }
+  
+      &:hover {
+        transform: scale(1.1);
+        color: $error-color
+      }
+    }
+  }
+  .delete-confirmation {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $error-color;
+    
+    
+    font-weight: 600;
+    font-size: small;
+    span {
+      padding-left: 1rem;
+      color: #FFFFFF;
+    }
+    .icon-btn-group {
+      display: flex;
+      gap: 3px;
+      padding-right: 1rem;
+    }
+    .icon-btn {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #ffffff;
+      font-weight: 600;
+      transition: transform 0.2s ease-in-out;
+  
+      .icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+      }
+  
+      &:hover {
+        transform: scale(1.1);
+        color: #F3E8FF;
+      }
+    }
+  }
+}
+
+@media (max-width: 1350px) {
+  .album-content {
+    grid-template-columns: repeat(3, 1fr) !important;  // 3 columns for medium screens
+  }
+}
+
+@media (max-width: 1030px) {
+  .album-content {
+    grid-template-columns: repeat(2, 1fr) !important;  // 2 columns for medium screens
+  }
+}
+
+@media (max-width: 768px) {
+  .album-content {
+    grid-template-columns: 1fr !important;  // 1 column for small screens
+  }
+}
+// Album
+.album-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.album-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;  // Ensures that the album header does not overflow
+  box-sizing: border-box;  // Ensures the padding doesn't cause the width to overflow
+  margin-bottom: 20px;
+  flex-direction: row;
+  gap: 10px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  div {
+    position: relative;
+    width: 100%;  // Ensures the div takes up available space
+    max-width: 280px;  // Optional: you can limit the maximum width for the input container
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
+  }
+
+  input {
+    width: 100%;  // Ensures the input takes up the full width of its parent div
+    padding: 0.5rem 1rem;  // Padding for the input field
+    padding-left: 2.5rem;  // Adjust for the icon
+    border: 2px solid #ddd;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;  // Ensures padding doesn't cause the input to overflow
+    transition: border-color 0.3s ease-in-out;
+    
+    &::placeholder {
+      color: #bbb;
+    }
+
+    &:focus {
+      border-color: $border-color;
+
+    }
+    
+  }
+
+  // Icon style inside the input
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;  // Space for the icon
+    transform: translateY(-50%);
+    
+    height: 20px;
+    width: 20px;
+    fill: #bbb;
+    pointer-events: none;  // Prevent clicking on the icon itself
+  }
+}
+
+.album-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  // 4 columns max
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;  // Ensure no horizontal overflow
+  margin-bottom: 20px;
+}
+
+.album-footer {
+  display: flex;
+  justify-content: end;
+  width: 100%; 
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-family: sans-serif;
+    
+    button {
+      background-color: $primary-color; 
+      border: none; 
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 0.375rem; 
+      transition: background-color 0.2s, border-color 0.2s;
+      color: #FFFFFF;
+      
+      &:hover {
+        background-color: $primary-color-dark; 
+      }
+  
+      &:disabled {
+        background-color: #f9fafb; 
+        cursor: not-allowed;
+        border-color: #e5e7eb; 
+        color: #d1d5db;
+      }
+    }
+  
+    span {
+      font-size: 1rem;
+      color: #4b5563;
+    }
+  }
+  
+}
+.btn {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &.loading {
+    pointer-events: none;
+    opacity: 0.7;
+
+    .btn-text {
+      visibility: hidden;
+    }
+
+    &::after {
+      content: "";
+      width: 1.2rem;
+      height: 1.2rem;
+      border: 2px solid transparent;
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      position: absolute;
+    }
+  }
+}
+
+.page-spinner {
+  width: 100%;
+  height: 85vh;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 4px solid #ccc;
+    border-top-color: $primary-color; // your primary color
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.alert-error {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border: 1px solid #fca5a5;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+
+  .alert-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .alert-text {
+    flex: 1;
+  }
+
+  .alert-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #b91c1c;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+
+
+
+
