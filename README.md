@@ -8,7 +8,7 @@ Before you begin, ensure you have the following installed on your machine:
 - **Composer** (for PHP dependency management)
 - **Node.js** (version 16 or higher)
 - **npm** or **Yarn** (for managing JavaScript dependencies)
-- **MySQL** or **PostgreSQL** (or any database you prefer for Laravel)
+- **MySQL** 
 - **Vite** (for frontend asset bundling)
 
 ---
